@@ -1,10 +1,10 @@
 <template>
   <div class="todo-container">
     <header class="header">
-      <h1>My TODO List</h1>
+      <h1>Mi Lista de Tareas</h1>
       <div class="user-info">
-        <span>Welcome, {{ username }}</span>
-        <button @click="logout" class="logout-btn">Logout</button>
+        <span>Bienvenido, {{ username }}</span>
+        <button @click="logout" class="logout-btn">Cerrar Sesión</button>
       </div>
     </header>
 
@@ -12,16 +12,16 @@
       <div class="add-todo">
         <input
           v-model="newTodo.title"
-          placeholder="What needs to be done?"
+          placeholder="¿Qué necesita hacerse?"
           @keyup.enter="addTodo"
           class="todo-input"
         />
         <textarea
           v-model="newTodo.description"
-          placeholder="Description (optional)"
+          placeholder="Descripción (opcional)"
           class="todo-textarea"
         ></textarea>
-        <button @click="addTodo" class="add-btn">Add Task</button>
+        <button @click="addTodo" class="add-btn">Agregar Tarea</button>
       </div>
 
       <div class="todos-list">
@@ -40,16 +40,16 @@
             <div class="todo-text">
               <h3>{{ todo.title }}</h3>
               <p v-if="todo.description">{{ todo.description }}</p>
-              <small>Created: {{ formatDate(todo.created_at) }}</small>
+              <small>Creado: {{ formatDate(todo.created_at) }}</small>
             </div>
           </div>
           <button @click="deleteTodo(todo.id)" class="delete-btn">
-            Delete
+            Eliminar
           </button>
         </div>
 
         <p v-if="todos.length === 0" class="empty-message">
-          No tasks yet. Add your first task above!
+          No hay tareas aún. ¡Agrega tu primera tarea arriba!
         </p>
       </div>
     </div>
@@ -62,7 +62,7 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/api';
 
 export default {
-  name: 'TodoList',
+  name: 'ListaTareas',
   data() {
     return {
       todos: [],
@@ -86,7 +86,7 @@ export default {
         });
         this.todos = response.data;
       } catch (error) {
-        console.error('Error loading todos:', error);
+        console.error('Error cargando tareas:', error);
       }
     },
     async addTodo() {
@@ -101,7 +101,7 @@ export default {
         this.todos.unshift(response.data);
         this.newTodo = { title: '', description: '' };
       } catch (error) {
-        console.error('Error adding todo:', error);
+        console.error('Error agregando tarea:', error);
       }
     },
     async updateTodo(todo) {
@@ -111,7 +111,7 @@ export default {
           headers: { Authorization: `Bearer ${token}` }
         });
       } catch (error) {
-        console.error('Error updating todo:', error);
+        console.error('Error actualizando tarea:', error);
       }
     },
     async deleteTodo(todoId) {
@@ -122,7 +122,7 @@ export default {
         });
         this.todos = this.todos.filter((todo) => todo.id !== todoId);
       } catch (error) {
-        console.error('Error deleting todo:', error);
+        console.error('Error eliminando tarea:', error);
       }
     },
     logout() {

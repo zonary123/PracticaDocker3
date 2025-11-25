@@ -1,31 +1,35 @@
 <template>
   <div class="login-container">
     <div class="login-form">
-      <h1>TODO App</h1>
+      <h1>Aplicación de Tareas</h1>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label>Username</label>
+          <label>Usuario</label>
           <input
             type="text"
             v-model="form.username"
             required
-            placeholder="Enter your username"
+            placeholder="Ingresa tu usuario"
           />
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>Contraseña</label>
           <input
             type="password"
             v-model="form.password"
             required
-            placeholder="Enter your password"
+            placeholder="Ingresa tu contraseña"
           />
         </div>
         <button type="submit" :disabled="loading">
-          {{ isLogin ? 'Login' : 'Register' }}
+          {{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}
         </button>
         <p class="toggle-text" @click="isLogin = !isLogin">
-          {{ isLogin ? 'Need an account? Register' : 'Have an account? Login' }}
+          {{
+            isLogin
+              ? '¿Necesitas una cuenta? Regístrate'
+              : '¿Ya tienes cuenta? Inicia Sesión'
+          }}
         </p>
         <p v-if="error" class="error">{{ error }}</p>
       </form>
@@ -39,7 +43,7 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/api';
 
 export default {
-  name: 'Login',
+  name: 'InicioSesion',
   data() {
     return {
       isLogin: true,
@@ -66,10 +70,10 @@ export default {
           this.$router.push('/todos');
         } else {
           this.isLogin = true;
-          this.error = 'Registration successful! Please login.';
+          this.error = '¡Registro exitoso! Por favor inicia sesión.';
         }
       } catch (error) {
-        this.error = error.response?.data?.error || 'An error occurred';
+        this.error = error.response?.data?.error || 'Ocurrió un error';
       } finally {
         this.loading = false;
       }
