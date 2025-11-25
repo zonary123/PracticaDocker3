@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todo-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: todo_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - todo-network
+
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_USER: todo_user
+      DB_PASSWORD: todo_password
+      DB_NAME: todo_db
+    depends_on:
+      - mysql
+    networks:
+      - todo-network
+
+  frontend:
+    build: ./frontend
+    container_name: todo-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+
+volumes:
+  mysql_data:
+
+networks:
+  todo-network:
+    driver: bridge
