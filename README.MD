@@ -1,3 +1,5 @@
+Version: 1.0.0
+
 # 🚀 TODO List Application
 
 Una aplicación completa de lista de tareas construida con **Vue.js**, **Node.js/Express** y **MySQL**, completamente containerizada con **Docker**.
