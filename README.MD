@@ -37,7 +37,14 @@ Una aplicación completa de lista de tareas construida con **Vue.js**, **Node.js
 
 ### Iniciar la Aplicación
 
-#### Opción 1: Script Automatizado (Recomendado)
+1. Clona el repositorio:
+
+```
+git clone https://github.com/zonary123/PracticaDocker3.git
+ cd PracticaDocker3
+```
+
+2. Script Automatizado (Recomendado)
 
 **Windows:**
 
@@ -51,22 +58,8 @@ start-app.bat
 ./start-app.sh
 ```
 
-#### Opción 2: Manualmente
-
-1. Clona el repositorio:
-
-   ```
-   git clone https://github.com/tu-usuario/tu-repositorio.git
-    cd tu-repositorio
-   ```
-
-2. Construye y levanta los contenedores con Docker Compose:
-
-   ```
-   docker-compose up --build -d
-   ```
-
 3. Accede a la aplicación en tu navegador:
-   ```
-   http://localhost:8080
-   ```
+
+```
+http://localhost:8080
+```
